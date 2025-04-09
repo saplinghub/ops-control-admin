@@ -145,7 +145,19 @@ export class PluginCenterService {
         ...condition,
       };
     }
-    const plugins = await this.pluginInfoEntity.findBy(find);
+    const plugins = await this.pluginInfoEntity.find({
+      where: find,
+      select: [
+        'id',
+        'name',
+        'description',
+        'keyName',
+        'hook',
+        'version',
+        'pluginJson',
+        'config',
+      ],
+    });
     for (const plugin of plugins) {
       const data = await this.pluginService.getData(plugin.keyName);
       if (!data) {
