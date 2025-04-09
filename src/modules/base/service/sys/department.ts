@@ -39,10 +39,12 @@ export class BaseSysDepartmentService extends BaseService {
 
     // 过滤部门权限
     const find = this.baseSysDepartmentEntity.createQueryBuilder('a');
-    if (this.ctx.admin.username !== 'admin')
+    if (this.ctx.admin.username !== 'admin') {
       find.andWhere('a.id in (:...ids)', {
         ids: !_.isEmpty(permsDepartmentArr) ? permsDepartmentArr : [null],
       });
+      find.orWhere('a.userId = :userId', { userId: this.ctx.admin.userId });
+    }
     find.addOrderBy('a.orderNum', 'ASC');
     const departments: BaseSysDepartmentEntity[] = await find.getMany();
 

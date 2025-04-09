@@ -40,8 +40,9 @@ export class BaseSysUserService extends BaseService {
    */
   async page(query) {
     const { keyWord, status, departmentIds = [] } = query;
+    const userId = this.ctx.admin.userId;
     const permsDepartmentArr = await this.baseSysPermsService.departmentIds(
-      this.ctx.admin.userId
+      userId
     ); // 部门权限
     const sql = `
         SELECT
@@ -64,7 +65,7 @@ export class BaseSysUserService extends BaseService {
             ${this.setSql(true, 'and a.username != ?', ['admin'])}
             ${this.setSql(
               this.ctx.admin.username !== 'admin',
-              'and a.departmentId in (?)',
+              `and (a.departmentId in (?) or a.userId = ${userId})`,
               [!_.isEmpty(permsDepartmentArr) ? permsDepartmentArr : [null]]
             )} `;
     const result = await this.sqlRenderPage(sql, query);

@@ -10,6 +10,10 @@ export class BaseSysUserEntity extends BaseEntity {
   @Column({ comment: '部门ID', nullable: true })
   departmentId: number;
 
+  @Index()
+  @Column({ comment: '创建者ID', nullable: true })
+  userId: number;
+
   @Column({ comment: '姓名', nullable: true })
   name: string;
 

@@ -11,6 +11,11 @@ import { BaseSysDepartmentService } from '../../../service/sys/department';
   api: ['add', 'delete', 'update', 'list'],
   entity: BaseSysDepartmentEntity,
   service: BaseSysDepartmentService,
+  insertParam: ctx => {
+    return {
+      userId: ctx.admin.userId,
+    };
+  },
 })
 export class BaseDepartmentController extends BaseController {
   @Inject()

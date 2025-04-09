@@ -11,6 +11,11 @@ import { BaseSysUserService } from '../../../service/sys/user';
   api: ['add', 'delete', 'update', 'info', 'list', 'page'],
   entity: BaseSysUserEntity,
   service: BaseSysUserService,
+  insertParam: ctx => {
+    return {
+      userId: ctx.admin.userId,
+    };
+  },
 })
 export class BaseSysUserController extends BaseController {
   @Inject()
