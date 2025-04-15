@@ -184,6 +184,18 @@ export class PluginCenterService {
    * @returns
    */
   private getConfig(config: any) {
+    // 处理配置为字符串的情况
+    if (typeof config === 'string') {
+      try {
+        config = JSON.parse(config);
+      } catch (e) {
+        return {};
+      }
+    }
+    // 如果配置为空或非对象类型，则返回空对象
+    if (!config || typeof config !== 'object') {
+      return {};
+    }
     const env = this.app.getEnv();
     let isMulti = false;
     for (const key in config) {
