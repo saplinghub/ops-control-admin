@@ -69,8 +69,20 @@ export class CoolPlugin extends BasePluginHook implements BaseUpload {
   async uploadWithKey(filePath: any, key: any) {
     const { domain } = this.pluginInfo.config;
     const data = fs.readFileSync(filePath);
-    fs.writeFileSync(path.join(this.app.getBaseDir(), '..', key), data);
-    return domain + key;
+    // 如果文件夹不存在则创建
+    const dirPath = path.join(
+      pUploadPath(),
+      moment().format('YYYYMMDD'),
+      path.dirname(key)
+    );
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+    fs.writeFileSync(
+      path.join(pUploadPath(), moment().format('YYYYMMDD'), key),
+      data
+    );
+    return `${domain}/upload/${moment().format('YYYYMMDD')}/${key}`;
   }
 
   /**
