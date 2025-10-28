@@ -39,7 +39,7 @@ export class CoolPlugin extends BasePluginHook implements BaseUpload {
   async downAndUpload(url: string, fileName?: string) {
     const { domain } = this.pluginInfo.config;
     // 从url获取扩展名
-    const extend = path.extname(url);
+    const extend = path.extname(fileName ? fileName : url);
     const download = require('download');
     // 数据
     const data = url.includes('http')
