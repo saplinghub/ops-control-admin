@@ -16,6 +16,7 @@ import * as cron from '@midwayjs/cron';
 import * as DefaultConfig from './config/config.default';
 import * as LocalConfig from './config/config.local';
 import * as ProdConfig from './config/config.prod';
+import * as ws from '@midwayjs/ws';
 import * as cool from '@cool-midway/core';
 import * as upload from '@midwayjs/upload';
 // import * as task from '@cool-midway/task';
@@ -39,6 +40,8 @@ import * as upload from '@midwayjs/upload';
     upload,
     // cool-admin 官方组件 https://cool-js.com
     cool,
+    // websocket
+    ws,
     // rpc 微服务 远程调用
     // rpc,
     // 任务与队列

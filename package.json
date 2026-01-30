@@ -19,6 +19,7 @@
     "@midwayjs/typeorm": "^3.20.3",
     "@midwayjs/upload": "^3.20.3",
     "@midwayjs/validate": "^3.20.3",
+    "@midwayjs/ws": "^3.20.19",
     "adm-zip": "^0.5.16",
     "axios": "^1.8.4",
     "cron": "^4.1.3",
